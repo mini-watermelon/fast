@@ -1,19 +1,5 @@
 package com.wisdomelon.test.dom;
 
-import com.wisdomelon.base.code.template.entity.Field;
-import com.wisdomelon.base.code.template.entity.Table;
-import org.apache.velocity.VelocityContext;
-import org.apache.velocity.app.Velocity;
-import org.junit.Test;
-
-import java.io.File;
-import java.io.FileReader;
-import java.io.Reader;
-import java.io.StringWriter;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * @author wisdomelon
  * @date 2019/1/9 0009
@@ -22,10 +8,10 @@ import java.util.List;
  */
 public class TestVelocity {
 
-    @Test
+   /* @Test
     public void test1(){
         try {
-            /* 首先，初始化运行时引擎，使用默认的配置 */
+            *//* 首先，初始化运行时引擎，使用默认的配置 *//*
 
             List<Field> list = new ArrayList<>();
             Field field = new Field();
@@ -57,13 +43,13 @@ public class TestVelocity {
 
             Velocity.init();
 
-            /* 创建Context对象，然后把数据放进去 */
+            *//* 创建Context对象，然后把数据放进去 *//*
 
             VelocityContext context = new VelocityContext();
 
             context.put("table", table);
 
-            /* 渲染模板 */
+            *//* 渲染模板 *//*
 
             StringWriter w = new StringWriter();
             URL resource = Thread.currentThread().getContextClassLoader().getResource("template/mysql/person.vm");
@@ -78,5 +64,5 @@ public class TestVelocity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
+    }*/
 }

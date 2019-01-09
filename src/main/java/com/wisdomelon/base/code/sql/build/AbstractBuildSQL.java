@@ -134,7 +134,7 @@ public abstract class AbstractBuildSQL implements BuildSQL{
             fieldWhere.append(key).append("='").append(value).append("' AND ");
         }
         String fieldWhereStr = fieldWhere.toString();
-        if(fieldWhere.indexOf("AND") > 0) {
+        if(fieldWhere.indexOf("AND") > -1) {
             fieldWhereStr = fieldWhereStr.substring(0, fieldWhere.lastIndexOf("AND "));
         } else {
             fieldWhereStr = "";

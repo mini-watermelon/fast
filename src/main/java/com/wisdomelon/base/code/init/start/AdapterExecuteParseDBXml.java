@@ -71,6 +71,18 @@ public class AdapterExecuteParseDBXml extends AbstractExecute {
             }
         }
 
+        if(dbXmlDir.indexOf("classpath") > -1) {
+            String dirs = dbXmlDir.substring(dbXmlDir.indexOf("classpath:") + "classpath:".length());
+            URL resource = Thread.currentThread().getContextClassLoader().getResource(dirs);
+            if(resource == null) {
+                // 说明路径不存在
+                LOGGER.info("配置的xml文件路径不存在，本次解析结束。");
+                return;
+            } else {
+                dbXmlDir = resource.getPath();
+            }
+        }
+
         //2. 判断数据库类型，执行相应的解析
         if ("".equals(dbName) || null == dbName) {
             if("".equals(jdbcUrl) || null == jdbcUrl) {

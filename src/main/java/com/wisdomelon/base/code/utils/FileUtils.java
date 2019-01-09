@@ -26,7 +26,7 @@ public class FileUtils {
                 if(file.isDirectory()) {
                     list.addAll(getFileList(file.getPath(), new ArrayList<>()));
                 } else if(file.isFile()) {
-                    if(file.getName().lastIndexOf(".xml") > 0) {
+                    if(file.getName().lastIndexOf(".xml") > -1) {
                         list.add(file);
                     }
                 }

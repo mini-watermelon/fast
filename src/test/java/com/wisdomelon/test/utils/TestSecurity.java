@@ -1,8 +1,5 @@
 package com.wisdomelon.test.utils;
 
-import com.wisdomelon.base.utils.cryptology.*;
-import org.junit.Test;
-
 /**
  * @author wisdomelon
  * @date 2019/1/8 0008
@@ -11,7 +8,7 @@ import org.junit.Test;
  */
 public class TestSecurity {
 
-    @Test
+    /*@Test
     public void test1(){
         String md5String = MD5Utils.getMD5String("111111");
         System.out.println(md5String);
@@ -86,5 +83,5 @@ public class TestSecurity {
 
         String encode5 = SpringSecurityUtils.encode("111111", MessageDigestAlgorithms.SHA_512);
         System.out.println(encode5);
-    }
+    }*/
 }

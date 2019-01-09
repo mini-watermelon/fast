@@ -1,17 +1,5 @@
 package com.wisdomelon.test.dom;
 
-import com.wisdomelon.base.code.init.abst.AbstractExecute;
-import com.wisdomelon.base.code.init.start.AdapterExecuteParseDBXml;
-import com.wisdomelon.base.code.sql.strategy.Strategy;
-import com.wisdomelon.base.code.sql.strategy.impl.UuidStrategy;
-import com.wisdomelon.base.code.utils.FileUtils;
-import org.junit.Test;
-
-import java.io.File;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * @author wisdomelon
  * @date 2019/1/8 0008
@@ -20,7 +8,7 @@ import java.util.List;
  */
 public class TestOne {
 
-    @Test
+    /*@Test
     public void testStrategy(){
         Strategy strategy = new UuidStrategy();
         strategy.createValue();
@@ -48,6 +36,6 @@ public class TestOne {
         AbstractExecute parseDBXml = AdapterExecuteParseDBXml.getInstance("oracle", "oracle.jdbc.driver.OracleDriver", "jdbc.url=jdbc:oracle:thin:@localhost:1521:orcl", "fast", "111111");
 
         parseDBXml.execute();
-    }
+    }*/
 
 }

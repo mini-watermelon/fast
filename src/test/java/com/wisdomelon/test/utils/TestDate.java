@@ -1,10 +1,5 @@
 package com.wisdomelon.test.utils;
 
-import com.wisdomelon.base.utils.datetime.DateUtils;
-import org.junit.Test;
-
-import java.util.Date;
-
 /**
  * @author wisdomelon
  * @date 2019/1/8 0008
@@ -13,7 +8,7 @@ import java.util.Date;
  */
 public class TestDate {
 
-    @Test
+    /*@Test
     public void test1(){
         System.out.println(DateUtils.getNowDateStr());
         System.out.println(DateUtils.getNowTimeStr());
@@ -42,5 +37,5 @@ public class TestDate {
     public void test4() {
         System.out.println(DateUtils.getNowFirstDayOfMonth("yyyy/MM/dd HH"));
         System.out.println(DateUtils.getNowLastDayOfMonth("yyyy/MM/dd HH"));
-    }
+    }*/
 }

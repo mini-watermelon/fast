@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <tables xmlns="http://www.wisdomelon.com/DBOracleSchema" moduleName="auth" code="true">
 
-    <table name="fr_auth_account" type="modify">
+    <table name="ft_auth_account" type="modify">
         <create comment="权限用户表">
             <field name="id" type="varchar2" length="50" special="key" comment="主键"/>
             <field name="user_no" type="varchar2" length="50" special="notnull" comment="员工号"/>
