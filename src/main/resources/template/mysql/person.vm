@@ -1,0 +1,11 @@
+#set($size = $table.fieldList.size() )
+
+CREATE TABLE $table.tableName (
+#foreach( $field in $table.fieldList )
+    #if($foreach.count != $size)
+    $field.name $field.type $field.length $field.special COMMENT '$field.comment',
+    #else
+    $field.name $field.type $field.length $field.special COMMENT '$field.comment'
+    #end
+#end
+) COMMENT '$table.tableComment';

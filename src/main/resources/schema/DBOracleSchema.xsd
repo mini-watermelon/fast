@@ -1,0 +1,285 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://www.wisdomelon.com/DBOracleSchema"
+           xmlns="http://www.wisdomelon.com/DBOracleSchema"
+           elementFormDefault="qualified">
+
+    <xs:element name="tables">
+        <xs:annotation>
+            <xs:documentation><![CDATA[  SQL语句解析模板集 ]]></xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="table" minOccurs="1" maxOccurs="unbounded"></xs:element>
+            </xs:sequence>
+            <xs:attribute name="moduleName" default="" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation><![CDATA[ SQL所属模块 ]]></xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="code" default="false">
+                <xs:annotation>
+                    <xs:documentation><![CDATA[ 是否自动生成代码，如为true，则会根据每个table节点的type来判断是否生成代码 ]]></xs:documentation>
+                </xs:annotation>
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="true"></xs:enumeration>
+                        <xs:enumeration value="false"></xs:enumeration>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="table">
+        <xs:annotation>
+            <xs:documentation><![CDATA[ SQL语句解析模板 ]]></xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="create" minOccurs="1" maxOccurs="1"></xs:element>
+                <xs:element ref="truncate" minOccurs="0" maxOccurs="1"></xs:element>
+                <xs:element ref="insert" minOccurs="0" maxOccurs="unbounded"></xs:element>
+                <xs:element ref="update" minOccurs="0" maxOccurs="unbounded"></xs:element>
+                <xs:element ref="delete" minOccurs="0" maxOccurs="unbounded"></xs:element>
+            </xs:sequence>
+            <xs:attribute name="name" type="xs:string" use="required">
+                <xs:annotation>
+                    <xs:documentation><![CDATA[ 表名称 ]]></xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="type" default="create">
+                <xs:annotation>
+                    <xs:documentation><![CDATA[ 创建类型，create-无则create，有则跳过；modify-无则create，有则先drop后create；skip-无论有无直接skip ]]></xs:documentation>
+                </xs:annotation>
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="create"></xs:enumeration>
+                        <xs:enumeration value="modify"></xs:enumeration>
+                        <xs:enumeration value="skip"></xs:enumeration>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+            <xs:attribute name="code">
+                <xs:annotation>
+                    <xs:documentation><![CDATA[ 是否自动生成代码，默认跟随根节点上的code模式，如指定了则以该节点的为准 ]]></xs:documentation>
+                </xs:annotation>
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="true"></xs:enumeration>
+                        <xs:enumeration value="false"></xs:enumeration>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="truncate">
+        <xs:annotation>
+            <xs:documentation><![CDATA[ 清空表：truncate table #{tableName} ]]></xs:documentation>
+        </xs:annotation>
+    </xs:element>
+
+    <xs:element name="create">
+        <xs:annotation>
+            <xs:documentation><![CDATA[ 新建表：create table #{tableName} (#{field},#{field}...) comment #{comment} ]]></xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="field" maxOccurs="unbounded"></xs:element>
+            </xs:sequence>
+            <xs:attribute name="comment" default="" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation><![CDATA[ 表注释 ]]></xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="field">
+        <xs:annotation>
+            <xs:documentation><![CDATA[ 新建表的字段信息 ]]></xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:attribute name="name" use="required" default="" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation><![CDATA[ 字段名称 ]]></xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="type" use="required" default="">
+                <xs:annotation>
+                    <xs:documentation>
+                        <![CDATA[
+                            字段类型:
+                            char: 固定长度字符串  最大长度2000bytes
+                            varchar2: 可变长度的字符串  最大长度4000bytes  可做索引的最大长度749
+                            nchar: 根据字符集而定的固定长度字符串  最大长度2000bytes
+                            nvarchar2: 根据字符集而定的可变长度字符串  最大长度4000bytes
+                            date: 日期（日-月-年） DD-MM-YY(HH-MI-SS)
+                            timestamp: 日期（日-月-年）  DD-MM-YY(HH-MI-SS:FF3)
+                            long: 超长字符串  最大长度2G,足够存储大部头著作
+                            raw: 固定长度的二进制数据  最大长度2000bytes  可存放多媒体图象声音等
+                            long raw: 可变长度的二进制数据  最大长度2G  可存放多媒体图象声音等
+                            blob: 二进制数据  最大长度4G
+                            clob: 字符数据  最大长度4G
+                            nclob: 根据字符集而定的字符数据  最大长度4G
+                            bfile: 存放在数据库外的二进制数据  最大长度4G
+                            rowid: 数据表中记录的唯一行号  10bytes  **.*.*格式  *为0或1
+                            nrowid: 二进制数据表中记录的唯一行号  最大长度4000bytes
+                            number(p,s): 数字类型  p为整数位  s为小数位
+                            decimal(p,s): 数字类型  P为整数位  S为小数位
+                            integer: 整数类型  小的整数
+                            float: 浮点数类型  number(38)  双精度
+                            real: 实数类型  number(63)  精度更高
+		                ]]>
+                    </xs:documentation>
+                </xs:annotation>
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="char"></xs:enumeration>
+                        <xs:enumeration value="varchar2"></xs:enumeration>
+                        <xs:enumeration value="nchar"></xs:enumeration>
+                        <xs:enumeration value="nvarchar2"></xs:enumeration>
+                        <xs:enumeration value="date"></xs:enumeration>
+                        <xs:enumeration value="timestamp"></xs:enumeration>
+                        <xs:enumeration value="long"></xs:enumeration>
+                        <xs:enumeration value="raw"></xs:enumeration>
+                        <xs:enumeration value="long raw"></xs:enumeration>
+                        <xs:enumeration value="blob"></xs:enumeration>
+                        <xs:enumeration value="clob"></xs:enumeration>
+                        <xs:enumeration value="bfile"></xs:enumeration>
+                        <xs:enumeration value="rowid"></xs:enumeration>
+                        <xs:enumeration value="nrowid"></xs:enumeration>
+                        <xs:enumeration value="number"></xs:enumeration>
+                        <xs:enumeration value="decimal"></xs:enumeration>
+                        <xs:enumeration value="integer"></xs:enumeration>
+                        <xs:enumeration value="float"></xs:enumeration>
+                        <xs:enumeration value="real"></xs:enumeration>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+            <xs:attribute name="length" default="" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation><![CDATA[ 字段长度 ]]></xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="special" default="">
+                <xs:annotation>
+                    <xs:documentation><![CDATA[ 字段特殊属性[key、unique、null、notnull、unique|notnull] ]]></xs:documentation>
+                </xs:annotation>
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="key"></xs:enumeration>
+                        <xs:enumeration value="unique"></xs:enumeration>
+                        <xs:enumeration value="null"></xs:enumeration>
+                        <xs:enumeration value="notnull"></xs:enumeration>
+                        <xs:enumeration value="unique|notnull"></xs:enumeration>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+            <xs:attribute name="default" default="" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation><![CDATA[ 默认值 ]]></xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="comment" default="" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation><![CDATA[ 字段注释 ]]></xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="insert">
+        <xs:annotation>
+            <xs:documentation><![CDATA[ 新增数据：insert into #{tableName}(#{field.name}...) values(#{field.value}^#{field.strategy}...) ]]></xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="field" maxOccurs="unbounded">
+                    <xs:annotation>
+                        <xs:documentation><![CDATA[ 新增数据的字段和值（生成策略） ]]></xs:documentation>
+                    </xs:annotation>
+                    <xs:complexType>
+                        <xs:attribute name="name" default="" type="xs:string" use="required">
+                            <xs:annotation>
+                                <xs:documentation><![CDATA[ 字段名称 ]]></xs:documentation>
+                            </xs:annotation>
+                        </xs:attribute>
+                        <xs:attribute name="value" default="" type="xs:string">
+                            <xs:annotation>
+                                <xs:documentation><![CDATA[ 字段值 ]]></xs:documentation>
+                            </xs:annotation>
+                        </xs:attribute>
+                        <xs:attribute name="strategy" default="" type="xs:string">
+                            <xs:annotation>
+                                <xs:documentation><![CDATA[ 生成策略 ]]></xs:documentation>
+                            </xs:annotation>
+                        </xs:attribute>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="update">
+        <xs:annotation>
+            <xs:documentation><![CDATA[ 编辑数据：update #{tableName} set #{field.name}=#{field.value}^#{field.strategy},... where #{key}=#{value} ]]></xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="field" maxOccurs="unbounded">
+                    <xs:annotation>
+                        <xs:documentation><![CDATA[ 被编辑数据的字段和值（生成策略） ]]></xs:documentation>
+                    </xs:annotation>
+                    <xs:complexType>
+                        <xs:attribute name="name" default="" type="xs:string" use="required">
+                            <xs:annotation>
+                                <xs:documentation><![CDATA[ 字段名称 ]]></xs:documentation>
+                            </xs:annotation>
+                        </xs:attribute>
+                        <xs:attribute name="value" default="" type="xs:string">
+                            <xs:annotation>
+                                <xs:documentation><![CDATA[ 字段值 ]]></xs:documentation>
+                            </xs:annotation>
+                        </xs:attribute>
+                        <xs:attribute name="strategy" default="" type="xs:string">
+                            <xs:annotation>
+                                <xs:documentation><![CDATA[ 生成策略 ]]></xs:documentation>
+                            </xs:annotation>
+                        </xs:attribute>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute name="key" type="xs:string" use="required">
+                <xs:annotation>
+                    <xs:documentation><![CDATA[ 待更新数据的主键名称 ]]></xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="value" type="xs:string" use="required">
+                <xs:annotation>
+                    <xs:documentation><![CDATA[ 待更新数据的主键值 ]]></xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="delete">
+        <xs:annotation>
+            <xs:documentation><![CDATA[ 删除数据：delete from #{tableName} where #{key}=#{value} ]]></xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:attribute name="key" type="xs:string" use="required">
+                <xs:annotation>
+                    <xs:documentation><![CDATA[ 待删除数据的主键名称 ]]></xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="value" type="xs:string" use="required">
+                <xs:annotation>
+                    <xs:documentation><![CDATA[ 待删除数据的主键值 ]]></xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+
+</xs:schema>
