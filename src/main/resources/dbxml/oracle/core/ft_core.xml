@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
-<tables xmlns="http://www.wisdomelon.com/DBOracleSchema" moduleName="core" code="true">
+<tables xmlns="http://www.wisdomelon.com/DBOracleSchema" moduleName="core">
 
-    <table name="ft_core_config" type="modify">
+    <table name="ft_core_config">
         <create comment="核心配置表">
             <field name="id" type="varchar2" length="50" special="key" comment="主键"/>
             <field name="conf_key" type="varchar2" length="50" special="notnull" comment="配置键"/>
@@ -10,34 +10,9 @@
             <field name="type" type="varchar2" length="10" special="notnull" comment="类型[core-核心配置，extend-扩展配置]"/>
             <field name="remark" type="varchar2" length="400" comment="备注"/>
         </create>
-
-        <!--<truncate/>
-
-        <insert>
-            <field name="id" strategy="com.wisdomelon.base.code.sql.strategy.impl.UuidFilterStrategy"/>
-            <field name="conf_key" value="test1"/>
-            <field name="conf_value" value="测试1"/>
-            <field name="stat" value="lock"/>
-            <field name="type" value="core"/>
-            <field name="remark" value="This id testOne..."/>
-        </insert>
-        <insert>
-            <field name="id" strategy="com.wisdomelon.base.code.sql.strategy.impl.UuidFilterStrategy"/>
-            <field name="conf_key" value="test2"/>
-            <field name="conf_value" value="测试2"/>
-            <field name="stat" value="use"/>
-            <field name="type" value="extend"/>
-            <field name="remark" value="This id testTwo..."/>
-        </insert>
-
-        <update key="1" value="1">
-            <field name="conf_key" value="olala"/>
-        </update>
-
-       <delete key="1" value="1"></delete>-->
     </table>
 
-    <table name="ft_core_dict_type" type="modify">
+    <table name="ft_core_dict_type">
         <create comment="核心字典类型表">
             <field name="id" type="varchar2" length="50" special="key" comment="主键"/>
             <field name="type_name" type="varchar2" length="200" special="notnull" comment="类型名称"/>
@@ -47,7 +22,7 @@
         </create>
     </table>
 
-    <table name="ft_core_dict" type="modify">
+    <table name="ft_core_dict">
         <create comment="核心字典表">
             <field name="id" type="varchar2" length="50" special="key" comment="主键"/>
             <field name="dict_name" type="varchar2" length="50" special="notnull" comment="字典名称"/>

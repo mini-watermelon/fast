@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wisdomelon.sys.mapper.core.FtCoreConfigMaper">
+
+    <select id="selectOne" parameterType="com.wisdomelon.sys.entity.core.FtCoreConfig" resultType="com.wisdomelon.sys.entity.core.FtCoreConfig">
+        select * from ft_core_config where id=#{id}
+    </select>
+</mapper>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <!-- 配置druid数据源 -->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+        <property name="driverClassName" value="${jdbc.driverClass}" />
+        <property name="url" value="${jdbc.jdbcUrl}" />
+        <property name="username" value="${jdbc.user}" />
+        <property name="password" value="${jdbc.password}" />
+        <property name="initialSize" value="3" />
+        <property name="minIdle" value="3" />
+        <property name="maxActive" value="20" />
+        <property name="maxWait" value="60000" />
+        <property name="filters" value="stat,wall" />
+    </bean>
+
+    <!-- 在此可以配置多个数据源，配置多数据源需要新增com.wisdomelon.base.datasource.enums.DataSource类中的枚举类型 -->
+
+    <!-- druid -->
+    <bean id="stat-filter" class="com.alibaba.druid.filter.stat.StatFilter">
+        <property name="slowSqlMillis" value="3000" />
+        <property name="logSlowSql" value="true" />
+        <property name="mergeSql" value="true" />
+    </bean>
+    <bean id="wall-filter" class="com.alibaba.druid.wall.WallFilter">
+        <property name="dbType" value="mysql" />
+    </bean>
+
+    <!-- 多数据源配置 -->
+    <!--<bean id="dataSource" class="com.wisdomelon.base.datasource.ThreadLocalRountingDataSource">
+        <property name="defaultTargetDataSource" ref="dataSourceMaster"></property>
+        <property name="targetDataSources">
+            <map key-type="com.wisdomelon.base.datasource.enums.DataSource">
+                <entry key="MASTER" value-ref="dataSourceMaster"></entry>
+                &lt;!&ndash; 在此可以引用数据源 &ndash;&gt;
+            </map>
+        </property>
+    </bean>-->
+
+
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="configLocation" value="classpath:mybatis/mysql/config/mybatis-config.xml" />
+        <property name="mapperLocations" value="classpath:mybatis/mysql/mapper/*/*.xml" />
+    </bean>
+
+
+    <!-- 此处使用通用Mapper插件进行扫描，更多了解请访问 https://gitee.com/free/Mapper/wikis/pages -->
+    <!-- 原始Mybatis的class的全类型为：org.mybatis.spring.mapper.MapperScannerConfigurer -->
+    <bean class="tk.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.wisdomelon.sys.mapper" />
+        <!-- 此处使用通用Mapper插件,将该句注释 -->
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
+    </bean>
+
+    <!-- tx -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+
+    <tx:annotation-driven transaction-manager="transactionManager" />
+
+</beans>
