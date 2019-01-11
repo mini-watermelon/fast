@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<tables xmlns="http://www.wisdomelon.com/DBOracleSchema" moduleName="ser">
+
+    <table name="ft_ser_mail">
+        <create comment="SMTP邮件服务表">
+            <field name="id" type="varchar2" length="50" special="key" comment="主键"/>
+            <field name="smtp_ip" type="varchar2" length="100" special="notnull" comment="发件服务器"/>
+            <field name="smtp_port" type="varchar2" length="10" special="notnull" comment="发件服务器端口"/>
+            <field name="email" type="varchar2" length="50" special="notnull" comment="邮箱账号"/>
+            <field name="name" type="varchar2" length="50" comment="发件人名称"/>
+            <field name="password" type="varchar2" length="10" special="notnull" comment="邮箱密码"/>
+            <field name="scope" type="varchar2" length="10" special="notnull" comment="邮箱作用域[全局，指定用户]"/>
+        </create>
+    </table>
+
+    <table name="ft_ser_outbox">
+        <create comment="发件箱服务表">
+            <field name="id" type="varchar2" length="50" special="key" comment="主键"/>
+            <field name="user_id" type="varchar2" length="100" special="notnull" comment="发件用户ID"/>
+            <field name="user_name" type="varchar2" length="80" special="notnull" comment="发件用户名称"/>
+            <field name="email_id" type="varchar2" length="10" special="notnull" comment="邮箱服务ID"/>
+            <field name="title" type="varchar2" length="50" special="notnull" comment="发件标题"/>
+            <field name="content" type="varchar2" length="500" comment="发件内容"/>
+            <field name="recipents" type="varchar2" length="200" special="notnull" comment="收件人"/>
+            <field name="copys" type="varchar2" length="200" comment="抄送人"/>
+        </create>
+    </table>
+
+    <table name="ft_ser_file">
+        <create comment="文件服务表">
+            <field name="id" type="varchar2" length="50" special="key" comment="主键"/>
+            <field name="name" type="varchar2" length="100" special="notnull" comment="文件名称"/>
+            <field name="file_size" type="integer" default="0" comment="文件大小"/>
+            <field name="file_path" type="varchar2" length="200" special="notnull" comment="上传后的文件路径"/>
+            <field name="upload_time" type="varchar2" length="50" special="notnull" comment="上传时间"/>
+            <field name="user_id" type="varchar2" length="50" special="notnull" comment="上传人ID"/>
+            <field name="user_name" type="varchar2" length="80" special="notnull" comment="上传人名称"/>
+        </create>
+    </table>
+
+    <table name="ft_ser_nation">
+        <create comment="地名服务表">
+            <field name="id" type="varchar2" length="50" special="key" comment="地址主键"/>
+            <field name="name" type="varchar2" length="100" special="notnull" comment="地址名称"/>
+            <field name="parent_id" type="varchar2" length="50" special="notnull" comment="上级地址ID"/>
+            <field name="position" type="varchar2" length="200" comment="定位信息"/>
+            <field name="remark" type="varchar2" length="200"  comment="备注"/>
+        </create>
+    </table>
+
+    <table name="ft_ser_festival">
+        <create comment="节日服务表">
+            <field name="id" type="varchar2" length="50" special="key" comment="主键"/>
+            <field name="now_year" type="varchar2" length="50" special="notnull" comment="当前年份"/>
+            <field name="name" type="varchar2" length="50" special="notnull" comment="节日名称"/>
+            <field name="start_date" type="varchar2" length="50" comment="开始日期"/>
+            <field name="end_date" type="varchar2" length="50" comment="结束日期"/>
+            <field name="day_count" type="integer" comment="共计天数"/>
+            <field name="remark" type="varchar2" length="200" comment="备注"/>
+        </create>
+    </table>
+</tables>

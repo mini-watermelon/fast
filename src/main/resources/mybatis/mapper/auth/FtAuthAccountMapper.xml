@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wisdomelon.sys.mapper.auth.FtAuthAccountMapper">
+  <resultMap id="BaseResultMap" type="com.wisdomelon.sys.entity.auth.FtAuthAccount">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="USERNO" jdbcType="VARCHAR" property="userno" />
+    <result column="USERNAME" jdbcType="VARCHAR" property="username" />
+    <result column="PASSWORD" jdbcType="VARCHAR" property="password" />
+    <result column="ORG_ID" jdbcType="VARCHAR" property="orgId" />
+    <result column="ORG_NAME" jdbcType="VARCHAR" property="orgName" />
+    <result column="STAT" jdbcType="VARCHAR" property="stat" />
+    <result column="SEX" jdbcType="VARCHAR" property="sex" />
+    <result column="BIRTHDAY" jdbcType="VARCHAR" property="birthday" />
+    <result column="ADDRESS" jdbcType="VARCHAR" property="address" />
+    <result column="PHONE" jdbcType="VARCHAR" property="phone" />
+    <result column="TEL" jdbcType="VARCHAR" property="tel" />
+    <result column="EMAIL" jdbcType="VARCHAR" property="email" />
+    <result column="EMAIL_ID" jdbcType="VARCHAR" property="emailId" />
+    <result column="QQ" jdbcType="VARCHAR" property="qq" />
+    <result column="NATION" jdbcType="VARCHAR" property="nation" />
+    <result column="MARRIAGE" jdbcType="VARCHAR" property="marriage" />
+    <result column="POLITICAL" jdbcType="VARCHAR" property="political" />
+    <result column="EDU" jdbcType="VARCHAR" property="edu" />
+    <result column="ID_CARD" jdbcType="VARCHAR" property="idCard" />
+    <result column="IMG_SRC" jdbcType="VARCHAR" property="imgSrc" />
+  </resultMap>
+</mapper>

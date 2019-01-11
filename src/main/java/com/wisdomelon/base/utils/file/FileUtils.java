@@ -1,10 +1,10 @@
 package com.wisdomelon.base.utils.file;
 
 import com.wisdomelon.base.utils.datetime.DateUtils;
-import com.wisdomelon.base.utils.file.entity.FileDisposeException;
-import com.wisdomelon.base.utils.file.entity.FileExceptionParam;
-import com.wisdomelon.base.utils.file.entity.FileInfo;
-import com.wisdomelon.base.utils.file.entity.FileParam;
+import com.wisdomelon.base.utils.file.support.FileDisposeException;
+import com.wisdomelon.base.utils.file.support.FileExceptionParam;
+import com.wisdomelon.base.utils.file.support.FileInfo;
+import com.wisdomelon.base.utils.file.support.FileParam;
 import jxl.Cell;
 import jxl.Sheet;
 import jxl.Workbook;

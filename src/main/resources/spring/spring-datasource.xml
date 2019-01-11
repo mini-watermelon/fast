@@ -4,7 +4,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
     <!-- 配置druid数据源 -->
-    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+    <bean id="dataSourceMaster" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
         <property name="driverClassName" value="${jdbc.driverClass}" />
         <property name="url" value="${jdbc.jdbcUrl}" />
         <property name="username" value="${jdbc.user}" />
@@ -25,25 +25,25 @@
         <property name="mergeSql" value="true" />
     </bean>
     <bean id="wall-filter" class="com.alibaba.druid.wall.WallFilter">
-        <property name="dbType" value="mysql" />
+        <property name="dbType" value="${jdbc.jdbcType}" />
     </bean>
 
     <!-- 多数据源配置 -->
-    <!--<bean id="dataSource" class="com.wisdomelon.base.datasource.ThreadLocalRountingDataSource">
+    <bean id="dataSource" class="com.wisdomelon.base.datasource.ThreadLocalRountingDataSource">
         <property name="defaultTargetDataSource" ref="dataSourceMaster"></property>
         <property name="targetDataSources">
             <map key-type="com.wisdomelon.base.datasource.enums.DataSource">
                 <entry key="MASTER" value-ref="dataSourceMaster"></entry>
-                &lt;!&ndash; 在此可以引用数据源 &ndash;&gt;
+                <!-- 在此可以引用别的数据源 -->
             </map>
         </property>
-    </bean>-->
+    </bean>
 
 
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource" />
-        <property name="configLocation" value="classpath:mybatis/mysql/config/mybatis-config.xml" />
-        <property name="mapperLocations" value="classpath:mybatis/mysql/mapper/*/*.xml" />
+        <property name="configLocation" value="classpath:mybatis/config/mybatis-config.xml" />
+        <!--<property name="mapperLocations" value="classpath:mybatis/mapper/*/*.xml" />-->
     </bean>
 
 
@@ -51,7 +51,6 @@
     <!-- 原始Mybatis的class的全类型为：org.mybatis.spring.mapper.MapperScannerConfigurer -->
     <bean class="tk.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="com.wisdomelon.sys.mapper" />
-        <!-- 此处使用通用Mapper插件,将该句注释 -->
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
     </bean>
 

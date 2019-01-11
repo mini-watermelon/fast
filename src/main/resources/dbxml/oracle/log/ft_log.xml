@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<tables xmlns="http://www.wisdomelon.com/DBOracleSchema" moduleName="log">
+
+    <table name="ft_log_login">
+        <create comment="登陆日志表">
+            <field name="id" type="varchar2" length="50" special="key" comment="主键"/>
+            <field name="user_no" type="varchar2" length="50" special="notnull" comment="用户号"/>
+            <field name="user_name" type="varchar2" length="80" special="notnull" comment="用户名称"/>
+            <field name="login_ip" type="varchar2" length="100" special="notnull" comment="登录IP"/>
+            <field name="login_date" type="varchar2" length="50" comment="登录时间"/>
+            <field name="logon_date" type="varchar2" length="50" comment="登出时间"/>
+        </create>
+    </table>
+
+    <table name="ft_log_operate">
+        <create comment="操作日志表">
+            <field name="id" type="varchar2" length="50" special="key" comment="主键"/>
+            <field name="user_no" type="varchar2" length="50" special="notnull" comment="用户号"/>
+            <field name="user_name" type="varchar2" length="80" special="notnull" comment="用户名称"/>
+            <field name="user_ip" type="varchar2" length="100" special="notnull" comment="用户IP"/>
+            <field name="type" type="varchar2" length="10" comment="操作类型[GET-查，POST-增，PUT-改，DELETE-删]"/>
+            <field name="oper_time" type="varchar2" length="50" comment="操作时间"/>
+            <field name="oper_url" type="varchar2" length="200" comment="操作URL"/>
+            <field name="details" type="varchar2" length="20" comment="操作详情"/>
+        </create>
+    </table>
+
+</tables>

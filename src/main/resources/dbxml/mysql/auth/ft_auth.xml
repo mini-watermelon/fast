@@ -11,7 +11,7 @@
             <field name="org_name" type="varchar" length="200" special="notnull" comment="所属机构名称"/>
             <field name="stat" type="varchar" length="10" special="notnull" comment="状态[lock-锁定，use-正常]"/>
             <field name="sex" type="varchar" length="10" comment="性别[man-男，women-女]"/>
-            <field name="birthday" type="datetime" comment="出生年月"/>
+            <field name="birthday" type="varchar" length="50" comment="出生年月"/>
             <field name="address" type="varchar" length="400" comment="地址信息：xx省-xx市-xx县-详细地址"/>
             <field name="phone" type="varchar" length="20" comment="手机号"/>
             <field name="tel" type="varchar" length="50" comment="固定电话"/>
@@ -42,7 +42,7 @@
         </create>
     </table>
 
-    <table name="ft_auth_user_role">
+    <table name="ft_auth_account_org">
         <create comment="权限用户机构关联表">
             <field name="id" type="varchar" length="50" special="key" comment="主键"/>
             <field name="user_id" type="varchar" length="10" special="notnull" comment="用户号"/>
@@ -56,12 +56,12 @@
             <field name="name" type="varchar" length="50" special="notnull" comment="角色名称"/>
             <field name="type" type="varchar" length="10" special="notnull" comment="角色类型"/>
             <field name="creator" type="varchar" length="50" special="notnull" comment="创建人"/>
-            <field name="create_time" type="datetime" special="notnull" comment="创建时间"/>
-            <field name="intro" type="datetime" special="notnull" comment="角色描述"/>
+            <field name="create_time" type="varchar" length="50" special="notnull" comment="创建时间"/>
+            <field name="intro" type="varchar" length="200" special="notnull" comment="角色描述"/>
         </create>
     </table>
 
-    <table name="ft_auth_user_role">
+    <table name="ft_auth_account_role">
         <create comment="权限用户角色关联表">
             <field name="id" type="varchar" length="50" special="key" comment="主键"/>
             <field name="user_id" type="varchar" length="50" special="notnull" comment="用户号"/>
@@ -69,7 +69,7 @@
         </create>
     </table>
 
-    <table name="ft_auth_user_role">
+    <table name="ft_auth_org_role">
         <create comment="权限机构角色关联表">
             <field name="id" type="varchar" length="50" special="key" comment="主键"/>
             <field name="org_id" type="varchar" length="50" special="notnull" comment="机构号"/>
@@ -84,6 +84,7 @@
             <field name="url" type="varchar" length="200" comment="菜单URL"/>
             <field name="super_id" type="varchar" length="80" special="notnull" comment="上级菜单ID"/>
             <field name="stat" type="varchar" length="10" special="notnull" comment="状态[lock-锁定，use-正常]"/>
+            <field name="menu_level" type="int" comment="层级"/>
             <field name="menu_ord" type="int" comment="排序"/>
             <field name="icon" type="varchar" length="80" comment="图标"/>
             <field name="remark" type="varchar" length="200" comment="菜单简介"/>

@@ -8,11 +8,4 @@ package com.wisdomelon.test.utils;
  */
 public class TestCreateID {
 
-    /*@Test
-    public void test1(){
-        System.out.println(CreateID.getUniqueID());
-        System.out.println(CreateID.getFilterUnqiueID());
-        System.out.println(CreateID.getFilterUnqiueID("config"));
-        System.out.println(CreateID.getUniqueID("sys"));
-    }*/
 }

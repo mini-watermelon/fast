@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <properties resource="jdbc.properties"/>
+
+    <context id="auth" targetRuntime="MyBatis3Simple" defaultModelType="flat">
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+        <property name="javaFileEncoding" value="UTF-8"/>
+
+        <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
+            <property name="mappers" value="tk.mybatis.mapper.common.Mapper"/>
+            <property name="caseSensitive" value="true"/>
+        </plugin>
+
+        <jdbcConnection driverClass="${jdbc.driverClass}" connectionURL="${jdbc.jdbcUrl}" userId="${jdbc.user}" password="${jdbc.password}"></jdbcConnection>
+
+        <javaModelGenerator targetPackage="com.wisdomelon.sys.entity.auth" targetProject="src/main/java"/>
+
+        <sqlMapGenerator targetPackage="mybatis.mapper.auth" targetProject="src/main/resources"/>
+
+        <javaClientGenerator targetPackage="com.wisdomelon.sys.mapper.auth" targetProject="src/main/java" type="XMLMAPPER"/>
+
+        <table tableName="ft_auth_account">
+            <generatedKey column="id" sqlStatement="JDBC"/>
+        </table>
+        <table tableName="ft_auth_org"><generatedKey column="id" sqlStatement="JDBC"/></table>
+        <table tableName="ft_auth_account_org"><generatedKey column="id" sqlStatement="JDBC"/></table>
+        <table tableName="ft_auth_role"><generatedKey column="id" sqlStatement="JDBC"/></table>
+        <table tableName="ft_auth_account_role"><generatedKey column="id" sqlStatement="JDBC"/></table>
+        <table tableName="ft_auth_org_role"><generatedKey column="id" sqlStatement="JDBC"/></table>
+        <table tableName="ft_auth_menu">
+            <generatedKey column="id" sqlStatement="JDBC"/>
+            <columnOverride column="menu_level" javaType="java.lang.String"/>
+            <columnOverride column="menu_ord" javaType="java.lang.Integer"/>
+        </table>
+        <table tableName="ft_auth_res"><generatedKey column="id" sqlStatement="JDBC"/></table>
+        <table tableName="ft_auth_role_menu"><generatedKey column="id" sqlStatement="JDBC"/></table>
+    </context>
+
+    <context id="core" targetRuntime="MyBatis3Simple" defaultModelType="flat">
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+        <property name="javaFileEncoding" value="UTF-8"/>
+
+        <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
+            <property name="mappers" value="tk.mybatis.mapper.common.Mapper"/>
+            <property name="caseSensitive" value="true"/>
+        </plugin>
+
+        <jdbcConnection driverClass="${jdbc.driverClass}" connectionURL="${jdbc.jdbcUrl}" userId="${jdbc.user}" password="${jdbc.password}"></jdbcConnection>
+
+        <javaModelGenerator targetPackage="com.wisdomelon.sys.entity.core" targetProject="src/main/java"/>
+
+        <sqlMapGenerator targetPackage="mybatis.mapper.core" targetProject="src/main/resources"/>
+
+        <javaClientGenerator targetPackage="com.wisdomelon.sys.mapper.core" targetProject="src/main/java" type="XMLMAPPER"/>
+
+        <table tableName="ft_core_config"><generatedKey column="id" sqlStatement="JDBC"/></table>
+        <table tableName="ft_core_dict_type"><generatedKey column="id" sqlStatement="JDBC"/></table>
+        <table tableName="ft_core_dict"><generatedKey column="id" sqlStatement="JDBC"/></table>
+    </context>
+
+    <context id="log" targetRuntime="MyBatis3Simple" defaultModelType="flat">
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+        <property name="javaFileEncoding" value="UTF-8"/>
+
+        <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
+            <property name="mappers" value="tk.mybatis.mapper.common.Mapper"/>
+            <property name="caseSensitive" value="true"/>
+        </plugin>
+
+        <jdbcConnection driverClass="${jdbc.driverClass}" connectionURL="${jdbc.jdbcUrl}" userId="${jdbc.user}" password="${jdbc.password}"></jdbcConnection>
+
+        <javaModelGenerator targetPackage="com.wisdomelon.sys.entity.log" targetProject="src/main/java"/>
+
+        <sqlMapGenerator targetPackage="mybatis.mapper.log" targetProject="src/main/resources"/>
+
+        <javaClientGenerator targetPackage="com.wisdomelon.sys.mapper.log" targetProject="src/main/java" type="XMLMAPPER"/>
+
+        <table tableName="ft_log_login">
+            <generatedKey column="id" sqlStatement="JDBC"/>
+        </table>
+        <table tableName="ft_log_operate">
+            <generatedKey column="id" sqlStatement="JDBC"/>
+        </table>
+    </context>
+
+    <!--<context id="qrtz" targetRuntime="MyBatis3Simple" defaultModelType="flat">
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+        <property name="javaFileEncoding" value="UTF-8"/>
+
+        <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
+            <property name="mappers" value="tk.mybatis.mapper.common.Mapper"/>
+            <property name="caseSensitive" value="true"/>
+        </plugin>
+
+        <jdbcConnection driverClass="${jdbc.driverClass}" connectionURL="${jdbc.jdbcUrl}" userId="${jdbc.user}" password="${jdbc.password}">
+        </jdbcConnection>
+
+        <javaModelGenerator targetPackage="com.wisdomelon.sys.entity.qrtz" targetProject="src/main/java"/>
+
+        <sqlMapGenerator targetPackage="mybatis.mapper.qrtz" targetProject="src/main/resources"/>
+
+        <javaClientGenerator targetPackage="com.wisdomelon.sys.mapper.qrtz" targetProject="src/main/java" type="XMLMAPPER"/>
+
+        <table tableName="ft_auth_res"><generatedKey column="id" sqlStatement="JDBC"/></table>
+    </context>-->
+
+    <context id="ser" targetRuntime="MyBatis3Simple" defaultModelType="flat">
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+        <property name="javaFileEncoding" value="UTF-8"/>
+
+        <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
+            <property name="mappers" value="tk.mybatis.mapper.common.Mapper"/>
+            <property name="caseSensitive" value="true"/>
+        </plugin>
+
+        <jdbcConnection driverClass="${jdbc.driverClass}" connectionURL="${jdbc.jdbcUrl}" userId="${jdbc.user}" password="${jdbc.password}"></jdbcConnection>
+
+        <javaModelGenerator targetPackage="com.wisdomelon.sys.entity.ser" targetProject="src/main/java"/>
+
+        <sqlMapGenerator targetPackage="mybatis.mapper.ser" targetProject="src/main/resources"/>
+
+        <javaClientGenerator targetPackage="com.wisdomelon.sys.mapper.ser" targetProject="src/main/java" type="XMLMAPPER"/>
+
+        <table tableName="ft_ser_mail"><generatedKey column="id" sqlStatement="JDBC"/></table>
+        <table tableName="ft_ser_outbox"><generatedKey column="id" sqlStatement="JDBC"/></table>
+        <table tableName="ft_ser_file">
+            <generatedKey column="id" sqlStatement="JDBC"/>
+            <columnOverride column="file_size" javaType="java.lang.Integer"/>
+        </table>
+        <table tableName="ft_ser_nation"><generatedKey column="id" sqlStatement="JDBC"/></table>
+        <table tableName="ft_ser_festival">
+            <generatedKey column="id" sqlStatement="JDBC"/>
+            <columnOverride column="day_count" javaType="java.lang.Integer"/>
+        </table>
+    </context>
+
+
+</generatorConfiguration>

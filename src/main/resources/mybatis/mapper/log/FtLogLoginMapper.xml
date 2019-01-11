@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wisdomelon.sys.mapper.log.FtLogLoginMapper">
+  <resultMap id="BaseResultMap" type="com.wisdomelon.sys.entity.log.FtLogLogin">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="USER_NO" jdbcType="VARCHAR" property="userNo" />
+    <result column="USER_NAME" jdbcType="VARCHAR" property="userName" />
+    <result column="LOGIN_IP" jdbcType="VARCHAR" property="loginIp" />
+    <result column="LOGIN_DATE" jdbcType="VARCHAR" property="loginDate" />
+    <result column="LOGON_DATE" jdbcType="VARCHAR" property="logonDate" />
+  </resultMap>
+</mapper>

@@ -4,20 +4,19 @@
     <table name="ft_auth_account">
         <create comment="权限用户表">
             <field name="id" type="varchar2" length="50" special="key" comment="主键"/>
-            <field name="user_no" type="varchar2" length="50" special="notnull" comment="员工号"/>
-            <field name="user_name" type="varchar2" length="80" special="notnull" comment="员工名称"/>
+            <field name="userno" type="varchar2" length="50" special="unique|notnull" comment="用户号"/>
+            <field name="username" type="varchar2" length="80" special="notnull" comment="用户名称"/>
             <field name="password" type="varchar2" length="100" special="notnull" comment="登录密码"/>
             <field name="org_id" type="varchar2" length="100" special="notnull" comment="所属机构"/>
             <field name="org_name" type="varchar2" length="200" special="notnull" comment="所属机构名称"/>
-            <field name="post_code" type="varchar2" length="100" comment="所属岗位"/>
-            <field name="post_name" type="varchar2" length="200" comment="所属岗位名称"/>
-            <field name="stat" type="varchar2" length="10" special="notnull" comment="状态[lock-锁定，use-使用]"/>
+            <field name="stat" type="varchar2" length="10" special="notnull" comment="状态[lock-锁定，use-正常]"/>
             <field name="sex" type="varchar2" length="10" comment="性别[man-男，women-女]"/>
-            <field name="birthday" type="varchar2" length="40" comment="出生年月"/>
-            <field name="native" type="varchar2" length="400" comment="地址信息：xx省-xx市-xx县-详细地址"/>
+            <field name="birthday" type="varchar2" length="50" comment="出生年月"/>
+            <field name="address" type="varchar2" length="400" comment="地址信息：xx省-xx市-xx县-详细地址"/>
             <field name="phone" type="varchar2" length="20" comment="手机号"/>
             <field name="tel" type="varchar2" length="50" comment="固定电话"/>
-            <field name="mail" type="varchar2" length="50" comment="邮箱"/>
+            <field name="email" type="varchar2" length="50" comment="邮箱"/>
+            <field name="email_id" type="varchar2" length="50" comment="邮箱服务ID"/>
             <field name="qq" type="varchar2" length="20" comment="QQ号"/>
             <field name="nation" type="varchar2" length="20" comment="民族"/>
             <field name="marriage" type="varchar2" length="10" comment="婚姻状况"/>
@@ -28,4 +27,94 @@
         </create>
     </table>
 
+    <table name="ft_auth_org">
+        <create comment="权限机构表">
+            <field name="id" type="varchar2" length="50" special="key" comment="机构号"/>
+            <field name="name" type="varchar2" length="50" special="notnull" comment="机构名称"/>
+            <field name="parent_id" type="varchar2" length="80" special="notnull" comment="上级机构号"/>
+            <field name="type" type="varchar2" length="10" special="notnull" comment="类型"/>
+            <field name="stat" type="varchar2" length="10" special="notnull" comment="状态[lock-锁定，use-正常]"/>
+            <field name="phone" type="varchar2" length="20" comment="联系方式"/>
+            <field name="postcode" type="varchar2" length="10" comment="邮编"/>
+            <field name="address" type="varchar2" length="400" comment="地址：xx省-xx市-xx县-详细地址"/>
+            <field name="position" type="varchar2" length="200" comment="定位"/>
+            <field name="remark" type="varchar2" length="200" comment="机构简介"/>
+        </create>
+    </table>
+
+    <table name="ft_auth_account_org">
+        <create comment="权限用户机构关联表">
+            <field name="id" type="varchar2" length="50" special="key" comment="主键"/>
+            <field name="user_id" type="varchar2" length="10" special="notnull" comment="用户号"/>
+            <field name="org_id" type="varchar2" length="50" special="notnull" comment="机构号"/>
+        </create>
+    </table>
+
+    <table name="ft_auth_role">
+        <create comment="权限角色表">
+            <field name="id" type="varchar2" length="50" special="key" comment="角色主键"/>
+            <field name="name" type="varchar2" length="50" special="notnull" comment="角色名称"/>
+            <field name="type" type="varchar2" length="10" special="notnull" comment="角色类型"/>
+            <field name="creator" type="varchar2" length="50" special="notnull" comment="创建人"/>
+            <field name="create_time" type="varchar2" length="50" special="notnull" comment="创建时间"/>
+            <field name="intro" type="varchar2" length="50" special="notnull" comment="角色描述"/>
+        </create>
+    </table>
+
+    <table name="ft_auth_account_role">
+        <create comment="权限用户角色关联表">
+            <field name="id" type="varchar2" length="50" special="key" comment="主键"/>
+            <field name="user_id" type="varchar2" length="50" special="notnull" comment="用户号"/>
+            <field name="role_id" type="varchar2" length="10" special="notnull" comment="角色ID"/>
+        </create>
+    </table>
+
+    <table name="ft_auth_org_role">
+        <create comment="权限机构角色关联表">
+            <field name="id" type="varchar2" length="50" special="key" comment="主键"/>
+            <field name="org_id" type="varchar2" length="50" special="notnull" comment="机构号"/>
+            <field name="role_id" type="varchar2" length="10" special="notnull" comment="角色ID"/>
+        </create>
+    </table>
+
+    <table name="ft_auth_menu">
+        <create comment="权限菜单表">
+            <field name="id" type="varchar2" length="50" special="key" comment="菜单ID"/>
+            <field name="name" type="varchar2" length="50" special="notnull" comment="菜单名称"/>
+            <field name="url" type="varchar2" length="200" comment="菜单URL"/>
+            <field name="super_id" type="varchar2" length="80" special="notnull" comment="上级菜单ID"/>
+            <field name="stat" type="varchar2" length="10" special="notnull" comment="状态[lock-锁定，use-正常]"/>
+            <field name="menu_level" type="integer" comment="层级"/>
+            <field name="menu_ord" type="integer" comment="排序"/>
+            <field name="icon" type="varchar2" length="80" comment="图标"/>
+            <field name="remark" type="varchar2" length="200" comment="菜单简介"/>
+        </create>
+    </table>
+
+    <table name="ft_auth_res">
+        <create comment="权限资源表">
+            <field name="id" type="varchar2" length="50" special="key" comment="主键"/>
+            <field name="code" type="varchar2" length="50" special="unique|notnull" comment="资源代码"/>
+            <field name="name" type="varchar2" length="10" special="notnull" comment="资源名称"/>
+            <field name="scope" type="varchar2" length="10" special="notnull" comment="资源作用域[全局，指定菜单]"/>
+        </create>
+    </table>
+
+    <table name="ft_auth_user_menu">
+        <create comment="权限用户菜单关联表">
+            <field name="id" type="varchar2" length="50" special="key" comment="主键"/>
+            <field name="user_id" type="varchar2" length="50" special="notnull" comment="用户号"/>
+            <field name="menu_id" type="varchar2" length="10" special="notnull" comment="菜单ID"/>
+            <field name="menu_res" type="varchar2" length="10" special="notnull" comment="菜单操作资源"/>
+        </create>
+    </table>
+
+    <table name="ft_auth_role_menu">
+        <create comment="权限角色菜单关联表">
+            <field name="id" type="varchar2" length="50" special="key" comment="主键"/>
+            <field name="role_id" type="varchar2" length="50" special="notnull" comment="角色ID"/>
+            <field name="menu_id" type="varchar2" length="10" special="notnull" comment="菜单ID"/>
+            <field name="menu_res" type="varchar2" length="10" special="notnull" comment="菜单操作资源"/>
+        </create>
+    </table>
 </tables>

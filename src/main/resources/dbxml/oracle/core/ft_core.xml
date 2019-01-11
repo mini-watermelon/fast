@@ -4,10 +4,11 @@
     <table name="ft_core_config">
         <create comment="核心配置表">
             <field name="id" type="varchar2" length="50" special="key" comment="主键"/>
-            <field name="conf_key" type="varchar2" length="50" special="notnull" comment="配置键"/>
-            <field name="conf_value" type="varchar2" length="200" special="notnull" comment="配置值"/>
+            <field name="name" type="varchar2" length="50" special="notnull" comment="配置键"/>
+            <field name="code" type="varchar2" length="200" special="notnull" comment="配置值"/>
             <field name="stat" type="varchar2" length="10" special="notnull" comment="状态[lock-锁定，use-使用]"/>
             <field name="type" type="varchar2" length="10" special="notnull" comment="类型[core-核心配置，extend-扩展配置]"/>
+            <field name="create_time" type="varchar2" length="50" comment="创建时间"/>
             <field name="remark" type="varchar2" length="400" comment="备注"/>
         </create>
     </table>
@@ -15,22 +16,24 @@
     <table name="ft_core_dict_type">
         <create comment="核心字典类型表">
             <field name="id" type="varchar2" length="50" special="key" comment="主键"/>
-            <field name="type_name" type="varchar2" length="200" special="notnull" comment="类型名称"/>
-            <field name="type_code" type="varchar2" length="50" special="notnull" comment="类型编码"/>
+            <field name="name" type="varchar2" length="200" special="notnull" comment="类型名称"/>
+            <field name="code" type="varchar2" length="50" special="notnull" comment="类型编码"/>
             <field name="stat" type="varchar2" length="10" special="notnull" comment="状态[lock-锁定，use-使用]"/>
-            <field name="type_ord" type="integer" comment="排序"/>
+            <field name="create_time" type="varchar2" length="50" comment="创建时间"/>
+            <field name="remark" type="varchar2" length="400" comment="备注"/>
         </create>
     </table>
 
     <table name="ft_core_dict">
         <create comment="核心字典表">
             <field name="id" type="varchar2" length="50" special="key" comment="主键"/>
-            <field name="dict_name" type="varchar2" length="50" special="notnull" comment="字典名称"/>
-            <field name="dict_code" type="varchar2" length="200" special="notnull" comment="字典编码"/>
+            <field name="name" type="varchar2" length="50" special="notnull" comment="字典名称"/>
+            <field name="code" type="varchar2" length="200" special="notnull" comment="字典编码"/>
             <field name="type_id" type="varchar2" length="50" special="notnull" comment="类型ID"/>
             <field name="type_code" type="varchar2" length="50" special="notnull" comment="类型编码"/>
             <field name="stat" type="varchar2" length="10" special="notnull" comment="状态[lock-锁定，use-使用]"/>
-            <field name="dict_ord" type="integer" comment="排序"/>
+            <field name="create_time" type="varchar2" length="50" comment="创建时间"/>
+            <field name="remark" type="varchar2" length="400" comment="备注"/>
         </create>
     </table>
 

@@ -1,5 +1,9 @@
 package com.wisdomelon.test.dom;
 
+import com.wisdomelon.base.code.init.abst.AbstractExecute;
+import com.wisdomelon.base.code.init.start.AdapterExecuteParseDBXml;
+import org.junit.Test;
+
 /**
  * @author wisdomelon
  * @date 2019/1/8 0008
@@ -24,6 +28,10 @@ public class TestOne {
         System.out.println(fileList);
     }
 
+
+
+    */
+
     @Test
     public void test3() {
         AbstractExecute parseDBXml = AdapterExecuteParseDBXml.getInstance("mysql", "com.mysql.jdbc.Driver", "jdbc:mysql://localhost:3306/fastone", "root", "asd6170864");
@@ -36,6 +44,6 @@ public class TestOne {
         AbstractExecute parseDBXml = AdapterExecuteParseDBXml.getInstance("oracle", "oracle.jdbc.driver.OracleDriver", "jdbc.url=jdbc:oracle:thin:@localhost:1521:orcl", "fast", "111111");
 
         parseDBXml.execute();
-    }*/
+    }
 
 }

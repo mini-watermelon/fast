@@ -22,6 +22,7 @@
     </context:component-scan>
 
     <bean id="adapterExecuteParseDBXml" class="com.wisdomelon.base.code.init.start.AdapterExecuteParseDBXml" scope="singleton" init-method="execute" factory-method="getInstance">
+        <property name="dbName" value="${jdbc.jdbcType}"></property>
         <property name="driverClass" value="${jdbc.driverClass}"></property>
         <property name="jdbcUrl" value="${jdbc.jdbcUrl}"></property>
         <property name="username" value="${jdbc.user}"></property>

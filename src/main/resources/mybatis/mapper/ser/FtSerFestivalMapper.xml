@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wisdomelon.sys.mapper.ser.FtSerFestivalMapper">
+  <resultMap id="BaseResultMap" type="com.wisdomelon.sys.entity.ser.FtSerFestival">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="NOW_YEAR" jdbcType="VARCHAR" property="nowYear" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="START_DATE" jdbcType="VARCHAR" property="startDate" />
+    <result column="END_DATE" jdbcType="VARCHAR" property="endDate" />
+    <result column="DAY_COUNT" jdbcType="DECIMAL" property="dayCount" />
+    <result column="REMARK" jdbcType="VARCHAR" property="remark" />
+  </resultMap>
+</mapper>

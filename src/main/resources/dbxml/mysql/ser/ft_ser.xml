@@ -30,9 +30,9 @@
         <create comment="文件服务表">
             <field name="id" type="varchar" length="50" special="key" comment="主键"/>
             <field name="name" type="varchar" length="100" special="notnull" comment="文件名称"/>
-            <field name="size" type="int" default="0" comment="文件大小"/>
-            <field name="path" type="varchar" length="200" special="notnull" comment="上传后的文件路径"/>
-            <field name="upload_time" type="datetime" special="notnull" comment="上传时间"/>
+            <field name="file_size" type="int" default="0" comment="文件大小"/>
+            <field name="file_path" type="varchar" length="200" special="notnull" comment="上传后的文件路径"/>
+            <field name="upload_time" type="varchar" length="50" special="notnull" comment="上传时间"/>
             <field name="user_id" type="varchar" length="50" special="notnull" comment="上传人ID"/>
             <field name="user_name" type="varchar" length="80" special="notnull" comment="上传人名称"/>
         </create>
@@ -50,12 +50,12 @@
 
     <table name="ft_ser_festival">
         <create comment="节日服务表">
-            <field name="id" type="varchar" length="50" special="key" comment="地址主键"/>
-            <field name="year" type="year" special="notnull" comment="当前年份"/>
+            <field name="id" type="varchar" length="50" special="key" comment="主键"/>
+            <field name="now_year" type="year" special="notnull" comment="当前年份"/>
             <field name="name" type="varchar" length="50" special="notnull" comment="节日名称"/>
-            <field name="start" type="date" comment="开始日期"/>
-            <field name="end" type="date" comment="结束日期"/>
-            <field name="day" type="int" comment="共计天数"/>
+            <field name="start_date" type="varchar" length="50" comment="开始日期"/>
+            <field name="end_date" type="varchar" length="50" comment="结束日期"/>
+            <field name="day_count" type="int" comment="共计天数"/>
             <field name="remark" type="varchar" length="200" comment="备注"/>
         </create>
     </table>
